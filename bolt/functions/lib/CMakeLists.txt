@@ -94,6 +94,7 @@ bolt_add_library(
   StringUtil.cpp
   SubscriptUtil.cpp
   TimeUtils.cpp
+  Utf8Utils.cpp
 )
 
 target_link_libraries(

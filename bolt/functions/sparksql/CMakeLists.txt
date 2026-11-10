@@ -57,6 +57,7 @@ bolt_add_library(
   String.cpp
   UnscaledValueFunction.cpp
   VariantEncoding.cpp
+  GetJsonObject.cpp
 )
 
 target_link_libraries(

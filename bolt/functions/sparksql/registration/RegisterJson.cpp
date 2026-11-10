@@ -24,6 +24,7 @@
 #include "bolt/functions/sparksql/ToJson.h"
 #include "bolt/functions/sparksql/specialforms/FromJson.h"
 #include "bolt/functions/sparksql/specialforms/JsonSplit.h"
+#include "functions/sparksql/GetJsonObject.h"
 namespace bytedance::bolt::functions {
 namespace sparksql {
 void registerJsonFunctions(const std::string& prefix) {
@@ -44,7 +45,7 @@ void registerJsonFunctions(const std::string& prefix) {
   //   registerFunction<SIMDGetJsonObjectFunction, Varchar, Varchar, Varchar>(
   //       {prefix + "get_json_object"});
 
-  registerFunction<JsonExtractScalarFunction, Varchar, Varchar, Varchar>(
+  registerFunction<GetJsonObjectFunction, Varchar, Varchar, Varchar>(
       {prefix + "get_json_object"});
 
   registerFunction<JsonObjectKeysFunction, Array<Varchar>, Varchar>(

@@ -39,12 +39,6 @@
 #include "folly/Range.h"
 namespace bytedance::bolt::functions {
 
-namespace detail {
-
-std::string normalizeJsonPath(StringView jsonPath);
-
-} // namespace detail
-
 // The legacy flag mainly controls the behavior of the return results when
 // encountering illegal characters If true, the already parsed portion of the
 // results will be returned normally, and all unparsed parts will be null If

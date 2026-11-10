@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#include "bolt/functions/prestosql/json/JsonExtractor.h"
+#include "bolt/functions/sparksql/GetJsonObject.h"
 
 #include <string_view>
 
@@ -24,7 +24,8 @@ namespace bytedance::bolt::functions::detail {
 namespace {
 
 std::string normalize(std::string_view path) {
-  return normalizeJsonPath(StringView(path.data(), path.size()));
+  return sparksql::detail::normalizeJsonPath(
+      StringView(path.data(), path.size()));
 }
 
 TEST(JsonPathNormalizerTest, root) {

@@ -234,7 +234,7 @@ class BoltConan(ConanFile):
                 transitive_headers=True,
                 transitive_libs=True,
             )
-        self.requires("simdjson/3.12.3", transitive_headers=True)
+        self.requires("simdjson/5.1.1", transitive_headers=True)
         self.requires(
             "sonic-cpp/1.0.2-bolt", transitive_headers=True, transitive_libs=True
         )

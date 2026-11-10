@@ -66,7 +66,7 @@ namespace detail {
 // 1. Preserves quoted bracket keys for JsonPathTokenizer.
 // 2. Removes spaces after dots outside bracket keys (e.g., "$. a" -> "$.a").
 // 3. Removes trailing spaces after root symbol (e.g., "$ " -> "$").
-std::string normalizeJsonPath(StringView jsonPath) {
+static std::string normalizeJsonPath(StringView jsonPath) {
   std::string path(jsonPath.data(), jsonPath.size());
   if (path.empty() || path[0] != '$') {
     return path;

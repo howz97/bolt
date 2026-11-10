@@ -455,19 +455,22 @@ TEST_F(JsonFucntionTest, whitespaceAfterDotInJsonPath) {
 }
 
 TEST_F(JsonFucntionTest, arrayWildcardSyntax) {
-  GTEST_SKIP() << "TODO: Fix Spark-compatible wildcard semantics";
-
+  const char* jsonArray = R"([{"a": "A"}])";
   const char* json =
       R"({"arr":[10,20],"object":{"*":"star"," *":"space star","*suffix":"suffix"}})";
   const auto test = [&]() {
-    EXPECT_EQ(testGetJsonObjectOnce(json, "$.arr. *"), std::nullopt);
-    EXPECT_EQ(testGetJsonObjectOnce(json, "$.arr.*"), std::nullopt);
-    EXPECT_EQ(testGetJsonObjectOnce(json, "$.arr[*]"), "[10,20]");
-    EXPECT_EQ(testGetJsonObjectOnce(json, "$.object.*"), "star");
-    EXPECT_EQ(testGetJsonObjectOnce(json, "$.object. *"), "star");
-    EXPECT_EQ(testGetJsonObjectOnce(json, "$.object.*suffix"), "suffix");
-    EXPECT_EQ(testGetJsonObjectOnce(json, "$.object['*']"), "star");
-    EXPECT_EQ(testGetJsonObjectOnce(json, "$.object[*]"), std::nullopt);
+    EXPECT_EQ(testGetJsonObjectOnce(jsonArray, "$[*].a"), R"("A")");
+    EXPECT_EQ(testGetJsonObjectOnce(jsonArray, "$.*.a"), std::nullopt);
+
+    // FIXME:
+    // EXPECT_EQ(testGetJsonObjectOnce(json, "$.arr. *"), std::nullopt);
+    // EXPECT_EQ(testGetJsonObjectOnce(json, "$.arr.*"), std::nullopt);
+    // EXPECT_EQ(testGetJsonObjectOnce(json, "$.arr[*]"), "[10,20]");
+    // EXPECT_EQ(testGetJsonObjectOnce(json, "$.object.*"), "star");
+    // EXPECT_EQ(testGetJsonObjectOnce(json, "$.object. *"), "star");
+    // EXPECT_EQ(testGetJsonObjectOnce(json, "$.object.*suffix"), "suffix");
+    // EXPECT_EQ(testGetJsonObjectOnce(json, "$.object['*']"), "star");
+    // EXPECT_EQ(testGetJsonObjectOnce(json, "$.object[*]"), std::nullopt);
   };
 
   for (const auto& [useSonicJson, useDomParser] :
